@@ -4,6 +4,7 @@ import CartColumns from "./CartColumns";
 import EmptyCart from "./EmptyCart";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
+import Title from "../../Title";
 
 export default class Cart extends Component {
   checkIEmpty = (array) => {
@@ -26,6 +27,7 @@ export default class Cart extends Component {
           <EmptyCart></EmptyCart>
         ) : (
           <Fragment>
+            <Title name="your" title="Cart"/>
             <CartColumns></CartColumns>
             <CartList Products={this.props.Products} increment={this.props.increment} decrement={this.props.decrement} {...this.props}></CartList>
             <CartTotals Products={this.props.Products} {...this.props}></CartTotals>

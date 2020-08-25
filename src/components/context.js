@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { loginUser, getProductsFromMongo } from './store/modules/dataReducer/dataReducer';
+import { loginUser, getProductsFromMongo, logoutUser } from './store/modules/dataReducer/dataReducer';
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
@@ -58,7 +58,10 @@ const ProductContext = React.createContext();
            value={{...this.state,
             loginUser: this.props.loginUser,
             isTokenValid: this.isTokenValid,
-            Products: this.props.Products 
+            Products: this.props.Products,
+            userDetails: this.props.userDetails,
+            cartTotal: this.props.cartTotal,
+            logoutUser: this.props.logoutUser 
            }}
            >
                {this.props.children}
@@ -71,12 +74,15 @@ const ProductConsumer = ProductContext.Consumer;
 const mapStateToProps = state => ({
     products: state.Data.products || [],
     Products:state.UI.Products || [],
-    token: state.Data.token
+    token: state.Data.token,
+    userDetails: state.Data.userDetails || {},
+    cartTotal: state.UI.cartTotal 
 });
 
 const mapActionsCreators = {
 getProductsFromMongo,
-loginUser
+loginUser,
+logoutUser
 };
 
 

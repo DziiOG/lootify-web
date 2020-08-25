@@ -4,6 +4,7 @@ import SearchComponent from "./SearchComponent/SearchComponent";
 import Product from "./Product/Product";
 import ProductList from "./ProductList/ProductList";
 import axios from "axios";
+import Title from "../../Title";
 
 export class Home extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export class Home extends Component {
       await this.props.getProductsFromMongo();
      // await this.props.getUserCart();
      /// await this.props.getUserFavorites();
-      // this.props.addTotal();
+       this.props.addTotal();
       this.setState({
         loading: false
       })
@@ -47,7 +48,7 @@ export class Home extends Component {
            <SearchComponent />
          </div>
  
-         <div>
+         <div className="container-fluid">
            ...LOADING
          </div>
        </div>: 
@@ -55,7 +56,7 @@ export class Home extends Component {
             <div className="header-fluid-container">
               <SearchComponent />
             </div>
-    
+              <Title name="our" title="Products" />
             <div>
               <ProductList
                 Products={this.props.Products}

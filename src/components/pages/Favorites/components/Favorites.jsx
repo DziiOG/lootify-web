@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Banner from "./Banner/Banner";
+import Title from "../../Title";
 
 
 
@@ -20,6 +21,7 @@ export class Favorites extends Component {
     
     return (
         <Fragment>
+            <Title name="Your" title="Favorites"></Title>
             <div className="py-5">
                 <div className="container-fluid container-lool">
                     <div className="row">

@@ -24,7 +24,7 @@ export default class AppContainer extends Component {
                   {(value) => (
             <Router>
               <div className="welcomeContainer">
-                <Navbar></Navbar>
+                <Navbar value={value}></Navbar>
                   <Switch>
                         <Fragment>
                           <Route

@@ -16,9 +16,20 @@ const {
   UNFAVORITE_PRODUCT,
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  LOGOUT_NIGGA
 } = constants;
 
 //Actions
+export function logoutUser(){
+  return (dispatch=>{
+    dispatch({
+      type: LOGOUT_NIGGA,
+      payload: null
+    })
+  })
+}
+
+
 export function loginUser(userDetails, history) {
   return (dispatch) => {
     dispatch({
@@ -161,8 +172,8 @@ export function getProductsFromMongo() {
        await dispatch(getUserCart())
       }).then(async()=> {
         await dispatch(getUserFavorites())
-      }).then(()=>{
-        dispatch(addTotal())
+      }).then(async ()=>{
+        await dispatch(addTotal())
       })
       .then(()=>{
         dispatch({
@@ -345,14 +356,34 @@ function handleGetProductsFromMongo(state, action) {
   });
 }
 
+function handleGetUserData(state, action) {
+  return update(state, {
+    userDetails: {
+      $set: action.payload,
+    },
+  });
+}
+
+function handleLogoutUser(state, action){
+  return {
+    ...state,
+    products: [],
+    token: "",
+    userDetails: {}
+  }
+}
 const ACTION_HANDLERS = {
   GET_TOKEN: handleGetToken,
   GET_PRODUCTS: handleGetProductsFromMongo,
+  GET_USER_DATA: handleGetUserData,
+  LOGOUT_NIGGA: handleLogoutUser
+
 };
 
 const initialState = {
   token: "",
   products: [],
+  userDetails: {}
 };
 
 export function dataReducer(state = initialState, action) {
